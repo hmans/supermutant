@@ -1,0 +1,28 @@
+{
+  "name": "example-package",
+  "private": true,
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "description": "",
+  "version": "0.0.1",
+  "main": "dist/example-package.cjs.js",
+  "module": "dist/example-package.esm.js",
+  "files": [
+    "dist/**"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "preconstruct build",
+    "test": "jest --passWithNoTests"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ]
+  }
+}
