@@ -23,5 +23,8 @@
       "@babel/preset-env",
       "@babel/preset-typescript"
     ]
+  },
+  "dependencies": {
+    "eventery": "^0.0.3"
   }
 }
