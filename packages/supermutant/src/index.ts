@@ -2,7 +2,22 @@ import { Event } from "eventery";
 
 const callbacks = new WeakMap<any, Event<any>>();
 
+const subjects = new WeakSet<any>();
+
+export function supermutant<T>(subject: T) {
+  subjects.add(subject);
+  return subject;
+}
+
+function assertSupermutated<T>(subject: T) {
+  if (!subjects.has(subject)) {
+    throw new Error("Subject is not supermutated");
+  }
+}
+
 export function onUpdate<T>(subject: T) {
+  assertSupermutated(subject);
+
   let event = callbacks.get(subject);
 
   if (!event) {
@@ -13,10 +28,12 @@ export function onUpdate<T>(subject: T) {
   return event;
 }
 
-export function update<T>(store: T, mutator?: (store: T) => void) {
+export function update<T>(subject: T, mutator?: (store: T) => void) {
+  assertSupermutated(subject);
+
   /* Execute mutator if one is given */
-  mutator?.(store);
+  mutator?.(subject);
 
   /* Emit update event if one exists */
-  callbacks.get(store)?.emit(store);
+  callbacks.get(subject)?.emit(subject);
 }
