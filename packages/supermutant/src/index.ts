@@ -15,7 +15,7 @@ function assertSupermutated<T>(subject: T) {
   }
 }
 
-export function onUpdate<T>(subject: T) {
+export function onMutate<T>(subject: T) {
   assertSupermutated(subject);
 
   let event = callbacks.get(subject);
@@ -28,7 +28,7 @@ export function onUpdate<T>(subject: T) {
   return event;
 }
 
-export function update<T>(subject: T, mutator?: (store: T) => void) {
+export function mutate<T>(subject: T, mutator?: (store: T) => void) {
   assertSupermutated(subject);
 
   /* Execute mutator if one is given */
