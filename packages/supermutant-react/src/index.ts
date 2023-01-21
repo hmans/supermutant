@@ -1,12 +1,14 @@
+export * from "supermutant";
+
 import { useRerender } from "@hmans/use-rerender";
 import { useEffect, useState } from "react";
 import { onMutate } from "supermutant";
 
-export function useObserver<T>(subject: T): T;
+export function useMutant<T>(subject: T): T;
 
-export function useObserver<T, U>(subject: T, selector: (subject: T) => U): U;
+export function useMutant<T, U>(subject: T, selector: (subject: T) => U): U;
 
-export function useObserver<T, U>(subject: T, selector?: (subject: T) => U) {
+export function useMutant<T, U>(subject: T, selector?: (subject: T) => U) {
   const rerender = useRerender();
 
   const [value, setValue] = useState(() =>

@@ -49,11 +49,13 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
+      supermutant-react: workspace:^0.0.1
       typescript: ^4.9.3
       vite: ^4.0.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      supermutant-react: link:../../packages/supermutant-react
     devDependencies:
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
