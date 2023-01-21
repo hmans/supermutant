@@ -1,0 +1,40 @@
+{
+  "name": "supermutant-react",
+  "author": {
+    "name": "Hendrik Mans",
+    "email": "hendrik@mans.de",
+    "url": "https://hmans.dev/"
+  },
+  "description": "",
+  "version": "0.0.1",
+  "main": "dist/supermutant-react.cjs.js",
+  "module": "dist/supermutant-react.esm.js",
+  "files": [
+    "dist/**"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "preconstruct build",
+    "test": "jest --passWithNoTests"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@hmans/use-rerender": "^0.0.2",
+    "supermutant": "workspace:^0.0.1"
+  }
+}
