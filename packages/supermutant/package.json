@@ -1,15 +1,14 @@
 {
-  "name": "example-package",
-  "private": true,
+  "name": "supermutant",
   "author": {
-    "name": "",
-    "email": "",
-    "url": ""
+    "name": "Hendrik Mans",
+    "email": "hendrik@mans.de",
+    "url": "https://hmans.dev/"
   },
   "description": "",
   "version": "0.0.1",
-  "main": "dist/example-package.cjs.js",
-  "module": "dist/example-package.esm.js",
+  "main": "dist/supermutant.cjs.js",
+  "module": "dist/supermutant.esm.js",
   "files": [
     "dist/**"
   ],
