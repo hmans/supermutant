@@ -65,9 +65,9 @@ importers:
 
   packages/supermutant:
     specifiers:
-      eventery: ^0.0.3
+      eventery: ^0.0.4
     dependencies:
-      eventery: 0.0.3
+      eventery: 0.0.4
 
   packages/supermutant-react:
     specifiers:
@@ -3328,8 +3328,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /eventery/0.0.3:
-    resolution: {integrity: sha512-mOwN3Wo81IQePw0Y+8U4PNZ/SiXsJjq7qUwE+ps0XdQ3CLMCTo/oE6HY02fb3KXTzJUQn78W9kK2WbIs54EAEA==}
+  /eventery/0.0.4:
+    resolution: {integrity: sha512-rQbXJG8WX9z2cm3IJadkSUZLWFXuwGMIJ40oWyB23DhVb1e92T7Jx3qF0UwtgHI7D4VZzVswbZ7MXfW88cFF4Q==}
     dev: false
 
   /execa/5.1.1:

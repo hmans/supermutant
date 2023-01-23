@@ -25,6 +25,6 @@
     ]
   },
   "dependencies": {
-    "eventery": "^0.0.3"
+    "eventery": "^0.0.4"
   }
 }
