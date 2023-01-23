@@ -5,9 +5,4 @@ module.exports = {
   testPathIgnorePatterns: ["node_modules"],
   testEnvironment: "jsdom",
   moduleFileExtensions: ["js", "ts", "tsx"],
-  globals: {
-    "ts-jest": {
-      isolatedModules: true
-    }
-  }
-}
+};
