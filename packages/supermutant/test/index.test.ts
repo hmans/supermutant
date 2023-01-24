@@ -1,9 +1,9 @@
-import { onMutate, supermutant, mutate } from "../src";
+import { onMutate, mutate } from "../src";
 import { Event } from "eventery";
 
 describe(onMutate, () => {
   it("returns an event object representing updates to the given subject", () => {
-    const subject = supermutant({});
+    const subject = {};
     const event = onMutate(subject);
 
     expect(event).toBeDefined();
@@ -11,7 +11,7 @@ describe(onMutate, () => {
   });
 
   it("gets emitted when an update is performed on the subject", () => {
-    const subject = supermutant({});
+    const subject = {};
 
     const listener = jest.fn();
     onMutate(subject).subscribe(listener);
@@ -23,7 +23,7 @@ describe(onMutate, () => {
 
 describe(mutate, () => {
   it("notifies any subscribers about a mutation", () => {
-    const subject = supermutant({});
+    const subject = {};
 
     const listener = jest.fn();
     onMutate(subject).subscribe(listener);
@@ -33,7 +33,7 @@ describe(mutate, () => {
   });
 
   it("it executes the mutator callback if one is given", () => {
-    const subject = supermutant({ count: 0 });
+    const subject = { count: 0 };
 
     mutate(subject, (subject) => {
       subject.count++;

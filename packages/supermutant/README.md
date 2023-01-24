@@ -6,8 +6,6 @@ Turn any JavaScript object into a reactive state container.
 const myState = {
   counter: 0,
 };
-
-supermutant(myState);
 ```
 
 Subscribe to changes:
