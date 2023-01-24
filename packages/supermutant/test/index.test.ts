@@ -1,4 +1,4 @@
-import { onMutate, mutate, mutationEvent } from "../src";
+import { onMutate, mutate, mutationEvent, onValueChange } from "../src";
 import { Event } from "eventery";
 
 describe(mutationEvent, () => {
@@ -63,5 +63,32 @@ describe(mutate, () => {
     });
 
     expect(subject.count).toBe(1);
+  });
+});
+
+describe(onValueChange, () => {
+  it("executes the listener when the subject's selected value changes", () => {
+    const subject = { count: 0, name: "Alice" };
+
+    const listener = jest.fn();
+    onValueChange(subject, (subject) => subject.count, listener);
+
+    mutate(subject, (subject) => {
+      subject.count++;
+    });
+
+    expect(listener).toHaveBeenCalled();
+
+    mutate(subject, (subject) => {
+      subject.name = "Bob";
+    });
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    mutate(subject, (subject) => {
+      subject.count++;
+    });
+
+    expect(listener).toHaveBeenCalledTimes(2);
   });
 });

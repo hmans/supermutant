@@ -17,6 +17,23 @@ export function onMutate<T>(subject: T, callback: (subject: T) => void) {
   return mutationEvent(subject).subscribe(callback);
 }
 
+export function onValueChange<T>(
+  subject: T,
+  selector: (subject: T) => any,
+  callback: (subject: T) => void
+) {
+  let previousValue = selector(subject);
+
+  return onMutate(subject, (subject) => {
+    const currentValue = selector(subject);
+
+    if (currentValue !== previousValue) {
+      previousValue = currentValue;
+      callback(subject);
+    }
+  });
+}
+
 export function mutate<T>(subject: T, mutator?: (store: T) => void) {
   /* Execute mutator if one is given */
   mutator?.(subject);
