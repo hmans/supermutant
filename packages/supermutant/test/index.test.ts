@@ -1,10 +1,10 @@
-import { onMutate, mutate } from "../src";
+import { onMutate, mutate, mutationEvent } from "../src";
 import { Event } from "eventery";
 
-describe(onMutate, () => {
+describe(mutationEvent, () => {
   it("returns an event object representing updates to the given subject", () => {
     const subject = {};
-    const event = onMutate(subject);
+    const event = mutationEvent(subject);
 
     expect(event).toBeDefined();
     expect(event).toBeInstanceOf(Event);
@@ -14,10 +14,33 @@ describe(onMutate, () => {
     const subject = {};
 
     const listener = jest.fn();
-    onMutate(subject).subscribe(listener);
+    mutationEvent(subject).subscribe(listener);
 
     mutate(subject);
     expect(listener).toHaveBeenCalled();
+  });
+});
+
+describe(onMutate, () => {
+  it("subscribes to updates on the given subject", () => {
+    const subject = {};
+
+    const listener = jest.fn();
+    onMutate(subject, listener);
+
+    mutate(subject);
+    expect(listener).toHaveBeenCalled();
+  });
+
+  it("returns a function that unsubscribes the listener", () => {
+    const subject = {};
+
+    const listener = jest.fn();
+    const unsubscribe = onMutate(subject, listener);
+
+    unsubscribe();
+    mutate(subject);
+    expect(listener).not.toHaveBeenCalled();
   });
 });
 
@@ -26,7 +49,7 @@ describe(mutate, () => {
     const subject = {};
 
     const listener = jest.fn();
-    onMutate(subject).subscribe(listener);
+    onMutate(subject, listener);
 
     mutate(subject);
     expect(listener).toHaveBeenCalled();
