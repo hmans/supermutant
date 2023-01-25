@@ -1,6 +1,10 @@
 # SUPERMUTANT!
 
-Turn any JavaScript object into a reactive state container.
+EMBRACE THE MUTATION and turn any JavaScript object into a SUPERMUTANT REACTIVE STATE CONTAINER. _UUUAAAAAHHHHHHHHHHHRRRRRR_
+
+## Overview
+
+Any non-primitive JavaScript object can be turned into a reactive state container. Like this one:
 
 ```ts
 const myState = {
@@ -8,7 +12,13 @@ const myState = {
 };
 ```
 
-Subscribe to changes:
+All we need to do is wrap code that mutates it in `mutate`:
+
+```ts
+mutate(myState, (s) => s.counter++);
+```
+
+Interested parties can subscribe to mutations via `onMutate`:
 
 ```ts
 onMutate(myState, (s) => {
@@ -16,13 +26,7 @@ onMutate(myState, (s) => {
 });
 ```
 
-Mutate the state and notify subscribers:
-
-```ts
-mutate(myState, (s) => s.counter++);
-```
-
-If you're only interested in a specific property, you can pass a selector function as the third argument to `onMutate`:
+If you're only interested in a specific property, you can pass a selector function as the third argument to `onMutate`. This will make sure the callback is only invoked when the selected property changes:
 
 ```ts
 onMutate(
@@ -31,6 +35,8 @@ onMutate(
   (s) => s.counter
 );
 ```
+
+_UUUAAAHHHHHHHHH_
 
 ## License
 
