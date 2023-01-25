@@ -11,8 +11,8 @@ const myState = {
 Subscribe to changes:
 
 ```ts
-onMutate(myState, ({ counter }) => {
-  console.log("Counter is:", counter);
+onMutate(myState, (s) => {
+  console.log("Counter is:", s.counter);
 });
 ```
 
