@@ -6,7 +6,7 @@
     "url": "https://hmans.dev/"
   },
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/supermutant-react.cjs.js",
   "module": "dist/supermutant-react.esm.js",
   "files": [
@@ -35,6 +35,6 @@
   },
   "dependencies": {
     "@hmans/use-rerender": "^0.0.2",
-    "supermutant": "workspace:^0.0.1"
+    "supermutant": "workspace:^0.0.2"
   }
 }
