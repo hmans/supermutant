@@ -26,7 +26,7 @@ onMutate(myState, (s) => {
 });
 ```
 
-If you're only interested in a specific property, you can pass a selector function as the third argument to `onMutate`. This will make sure the callback is only invoked when the selected property changes:
+If you're only interested in changes to a specific property, you can pass a selector function as the third argument to `onMutate`. This will make sure the callback is only invoked when the selected value changes:
 
 ```ts
 onMutate(
