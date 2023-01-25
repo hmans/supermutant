@@ -1,4 +1,9 @@
-import { onMutate, mutate, mutationEvent, onValueChange } from "../src";
+import {
+  onMutate,
+  mutate,
+  mutationEvent,
+  onMutateSelector,
+} from "../src/supermutant";
 import { Event } from "eventery";
 
 describe(mutationEvent, () => {
@@ -66,12 +71,12 @@ describe(mutate, () => {
   });
 });
 
-describe(onValueChange, () => {
+describe(onMutateSelector, () => {
   it("executes the listener when the subject's selected value changes", () => {
     const subject = { count: 0, name: "Alice" };
 
     const listener = jest.fn();
-    onValueChange(subject, (subject) => subject.count, listener);
+    onMutateSelector(subject, (subject) => subject.count, listener);
 
     mutate(subject, (subject) => {
       subject.count++;
@@ -90,5 +95,24 @@ describe(onValueChange, () => {
     });
 
     expect(listener).toHaveBeenCalledTimes(2);
+  });
+
+  it("returns a function that will unsubscribe the listener", () => {
+    const subject = { count: 0, name: "Alice" };
+
+    const listener = jest.fn();
+    const unsubscribe = onMutateSelector(
+      subject,
+      (subject) => subject.count,
+      listener
+    );
+
+    unsubscribe();
+
+    mutate(subject, (subject) => {
+      subject.count++;
+    });
+
+    expect(listener).not.toHaveBeenCalled();
   });
 });
