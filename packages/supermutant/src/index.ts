@@ -1,1 +1,1 @@
-export { mutate, onMutate, onMutateSelector } from "./supermutant";
+export { mutate, onMutate } from "./supermutant";

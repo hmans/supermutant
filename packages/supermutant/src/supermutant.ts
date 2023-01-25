@@ -17,26 +17,23 @@ export function mutationEvent<T extends Subject>(subject: T) {
 
 export function onMutate<T extends Subject>(
   subject: T,
-  callback: (subject: T) => any
+  callback: (subject: T) => void,
+  selector?: (subject: T) => any
 ) {
-  return mutationEvent(subject).subscribe(callback);
-}
+  if (selector) {
+    let previousValue = selector(subject);
 
-export function onMutateSelector<T extends Subject>(
-  subject: T,
-  selector: (subject: T) => void,
-  callback: (subject: T) => void
-) {
-  let previousValue = selector(subject);
+    return mutationEvent(subject).subscribe((subject) => {
+      const currentValue = selector(subject);
 
-  return onMutate(subject, (subject) => {
-    const currentValue = selector(subject);
-
-    if (currentValue !== previousValue) {
-      previousValue = currentValue;
-      callback(subject);
-    }
-  });
+      if (currentValue !== previousValue) {
+        previousValue = currentValue;
+        callback(subject);
+      }
+    });
+  } else {
+    return mutationEvent(subject).subscribe(callback);
+  }
 }
 
 export function mutate<T extends Subject>(

@@ -1,9 +1,4 @@
-import {
-  onMutate,
-  mutate,
-  mutationEvent,
-  onMutateSelector,
-} from "../src/supermutant";
+import { onMutate, mutate, mutationEvent } from "../src/supermutant";
 import { Event } from "eventery";
 
 describe(mutationEvent, () => {
@@ -47,6 +42,33 @@ describe(onMutate, () => {
     mutate(subject);
     expect(listener).not.toHaveBeenCalled();
   });
+
+  describe("with selector", () => {
+    it("only notifies the listener when the selected value changes", () => {
+      const subject = { count: 0, name: "Alice" };
+
+      const listener = jest.fn();
+      onMutate(subject, listener, (subject) => subject.count);
+
+      mutate(subject, (subject) => {
+        subject.count++;
+      });
+
+      expect(listener).toHaveBeenCalled();
+
+      mutate(subject, (subject) => {
+        subject.name = "Bob";
+      });
+
+      expect(listener).toHaveBeenCalledTimes(1);
+
+      mutate(subject, (subject) => {
+        subject.count++;
+      });
+
+      expect(listener).toHaveBeenCalledTimes(2);
+    });
+  });
 });
 
 describe(mutate, () => {
@@ -68,51 +90,5 @@ describe(mutate, () => {
     });
 
     expect(subject.count).toBe(1);
-  });
-});
-
-describe(onMutateSelector, () => {
-  it("executes the listener when the subject's selected value changes", () => {
-    const subject = { count: 0, name: "Alice" };
-
-    const listener = jest.fn();
-    onMutateSelector(subject, (subject) => subject.count, listener);
-
-    mutate(subject, (subject) => {
-      subject.count++;
-    });
-
-    expect(listener).toHaveBeenCalled();
-
-    mutate(subject, (subject) => {
-      subject.name = "Bob";
-    });
-
-    expect(listener).toHaveBeenCalledTimes(1);
-
-    mutate(subject, (subject) => {
-      subject.count++;
-    });
-
-    expect(listener).toHaveBeenCalledTimes(2);
-  });
-
-  it("returns a function that will unsubscribe the listener", () => {
-    const subject = { count: 0, name: "Alice" };
-
-    const listener = jest.fn();
-    const unsubscribe = onMutateSelector(
-      subject,
-      (subject) => subject.count,
-      listener
-    );
-
-    unsubscribe();
-
-    mutate(subject, (subject) => {
-      subject.count++;
-    });
-
-    expect(listener).not.toHaveBeenCalled();
   });
 });
