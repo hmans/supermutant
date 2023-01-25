@@ -49,7 +49,7 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
-      supermutant-react: workspace:^0.0.1
+      supermutant-react: workspace:^0.0.2
       typescript: ^4.9.3
       vite: ^4.0.0
     dependencies:
@@ -74,7 +74,7 @@ importers:
       '@hmans/use-rerender': ^0.0.2
       react: ^18.2.0
       react-dom: ^18.2.0
-      supermutant: workspace:^0.0.1
+      supermutant: workspace:^0.0.2
     dependencies:
       '@hmans/use-rerender': 0.0.2_react@18.2.0
       supermutant: link:../supermutant
