@@ -18,7 +18,7 @@ export function useMutant<T, U>(subject: T, selector?: (subject: T) => U) {
   /* Let this component know when the subject is updated. */
   useEffect(
     () =>
-      onMutate(subject).subscribe((subject) => {
+      onMutate(subject, (subject) => {
         if (selector) {
           const newValue = selector(subject);
           if (newValue !== value) {
