@@ -1,8 +1,10 @@
 import { Event } from "eventery";
 
-const callbacks = new WeakMap<any, Event<any>>();
+export type Subject = any;
 
-export function mutationEvent<T>(subject: T) {
+const callbacks = new WeakMap<Subject, Event<[subject: Subject]>>();
+
+export function mutationEvent<T extends Subject>(subject: T) {
   let event = callbacks.get(subject);
 
   if (!event) {
@@ -13,13 +15,16 @@ export function mutationEvent<T>(subject: T) {
   return event;
 }
 
-export function onMutate<T>(subject: T, callback: (subject: T) => void) {
+export function onMutate<T extends Subject>(
+  subject: T,
+  callback: (subject: T) => any
+) {
   return mutationEvent(subject).subscribe(callback);
 }
 
-export function onMutateSelector<T>(
+export function onMutateSelector<T extends Subject>(
   subject: T,
-  selector: (subject: T) => any,
+  selector: (subject: T) => void,
   callback: (subject: T) => void
 ) {
   let previousValue = selector(subject);
@@ -34,7 +39,10 @@ export function onMutateSelector<T>(
   });
 }
 
-export function mutate<T>(subject: T, mutator?: (store: T) => void) {
+export function mutate<T extends Subject>(
+  subject: T,
+  mutator?: (store: T) => void
+) {
   /* Execute mutator if one is given */
   mutator?.(subject);
 
