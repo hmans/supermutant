@@ -11,17 +11,15 @@ const myState = {
 Subscribe to changes:
 
 ```ts
-onMutate(myState, (state) => {
-  console.log("Counter is:", state.counter);
+onMutate(myState, ({ counter }) => {
+  console.log("Counter is:", counter);
 });
 ```
 
 Mutate the state and notify subscribers:
 
 ```ts
-mutate(myState, (state) => {
-  state.counter++;
-});
+mutate(myState, (s) => s.counter++);
 ```
 
 If you're only interested in a specific property, you can pass a selector function as the third argument to `onMutate`:
@@ -29,8 +27,8 @@ If you're only interested in a specific property, you can pass a selector functi
 ```ts
 onMutate(
   myState,
-  (state) => console.log("Counter is:", state.counter),
-  (state) => state.counter
+  (s) => console.log("Counter is:", s.counter),
+  (s) => s.counter
 );
 ```
 
